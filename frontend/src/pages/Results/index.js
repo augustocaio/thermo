@@ -48,25 +48,23 @@ const lorem =
 export default function Results(){
   const [products, setProducts] = useState([])
   useEffect(() => {
-    HttpService.get("athlete?regiao="+window.localStorage.getItem("regiao")+"&modalidade="+window.localStorage.getItem("modalidade"), {})
+    HttpService.get("info", {})
       .then(result => {
-        setProducts(result.data.athletes);
+        setProducts(result.data);
       })
       .catch(error => console.error(error));
   }, []);
-
-
     return(
         <Page>
         <Header />
-        {products.map((product) => {
+        {console.log(products),
+        products.aparelhos.dict.map((ap) => {
           return (
             <ProductCard
-              image={product.imagem}
-              title={product.nome}
-              emailprof={product.email}
-              description={product.description}
-              price={"55,00"}
+              image={ap.grafico}
+              // title={aparelhos.aparelho}
+              // emailprof={aparelhos.status}
+              // price={"55,00"}
             />
           );
         })}

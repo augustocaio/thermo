@@ -73,16 +73,16 @@ interface Props {
   price: number;
 }
 
-export default function ProductCard({ image, title, emailprof, price }: Props) {
+export default function ProductCard({ image }: Props) {
   const history = useHistory()
   const [horario, setHorario] = useState('')
 
   return (
     <SCProductCard>
-      <img src={image} alt={title} />
+      <img src={image} />
       <Description>
-        <h1>{title}</h1>
-        <p id='emailprof'>{emailprof}</p>
+        {/* <h1>{title}</h1> */}
+        {/* <p id='emailprof'>{emailprof}</p> */}
       </Description>
       <Price>
         <p>Aparelho: { }</p>
