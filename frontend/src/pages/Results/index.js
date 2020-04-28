@@ -47,10 +47,14 @@ const lorem =
 
 export default function Results(){
   const [products, setProducts] = useState([])
+  const [prev, setPrev] = useState([])
   useEffect(() => {
     HttpService.get("info", {})
       .then(result => {
-        setProducts(result.data);
+        console.log(Object.values(result.data.aparelhos));
+        setProducts(Object.values(result.data.aparelhos));
+        setPrev(result.data.previsao);
+        console.log((result.data.previsao));
       })
       .catch(error => console.error(error));
   }, []);
@@ -58,16 +62,20 @@ export default function Results(){
         <Page>
         <Header />
         {console.log(products),
-        products.aparelhos.dict.map((ap) => {
+        products.map((ap) => {
           return (
             <ProductCard
               image={ap.grafico}
-              // title={aparelhos.aparelho}
+              aparelho={ap.aparelho}
+              prev = {prev}
+              id = {ap.id}
               // emailprof={aparelhos.status}
               // price={"55,00"}
             />
           );
-        })}
+          
+        })
+        }
       </Page>
     );
 

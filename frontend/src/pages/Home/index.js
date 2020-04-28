@@ -3,10 +3,12 @@ import styled from 'styled-components'
 import Header from '../../components/Header'
 import { useHistory } from 'react-router-dom';
 import Background from  '../../images/background.jpg'
+import HttpService from "../../services/http"
+
 
 const Formbox = styled.div`
     width: 70vw;
-    height: 25vh;
+    height: 30vh;
     margin-left: 15vw;
     margin-top: 15vh;
     opacity: 0.85;
@@ -49,9 +51,8 @@ const Page = styled.div`
 export default function Home(){
     const [nome, setNome] = useState('')
     const [modelo, setModelo] = useState(18)
-    const [email, setEmail] = useState('')
     const [marca, setMarca] = useState('')
-    const [modalmodelo, setModalmodelo] = useState('')
+    const [local, setLocal] = useState('')
 
     const history = useHistory()
 
@@ -73,17 +74,22 @@ export default function Home(){
                         <option value="Hitachi">Hitachi</option>
                         <option value="Hyundai">Hyundai</option>
                     </select>
+                    <select id="local" onChange={(event) => {setLocal(event.target.value)}}>
+                        <option value="" disabled selected>Escolha o local</option>
+                        <option value="sala">Sala</option>
+                        <option value="quarto">Quarto</option>
+                    </select>
                    
                 </div>
                 <div>
                     <button onClick={() => {
-                        console.log(nome, modelo);
-                        window.localStorage.setItem("nome", nome)
-                        window.localStorage.setItem("modelo", modelo)
-                        window.localStorage.setItem("email", email)
-                        window.localStorage.setItem("marca", marca)
-                        window.localStorage.setItem("modalmodelo", modalmodelo)
-                        history.push("/results")
+                        {HttpService.post("info/aparelho", 
+                        { "nome":nome,
+                            "modelo":modelo,
+                            "marca":marca,
+                            "local":local,
+                            "status":"Desligado"
+                        }).then(result => history.push("/ordered")) }
                     }}>Submeter</button>
                 </div>
             </Formbox>

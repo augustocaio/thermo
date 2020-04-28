@@ -38,21 +38,13 @@ const Page = styled.div`
 export default function Ordered(){
     const history = useHistory()
     const [advertisements, setAdvertisements] = useState([]);
-    useEffect(
-        () => {
-        AdvertisementsService.getByOwner('suplastore').then(result => {
-            setAdvertisements(result.data.advertisements);
-        });
-        },
-        []
-    );
 
     return(
         <Page>
             <Header />
             <Formbox>
                 <div>
-                    <p className="white">Adicionado com Sucesso!</p>
+                    <p className="white">Sucesso!</p>
                 </div>
             </Formbox>
             {/* {advertisements.map((advertisement) => {

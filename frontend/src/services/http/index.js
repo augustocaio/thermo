@@ -9,11 +9,7 @@ export default class HttpService {
   }
 
   static post(path, data = {}) {
-    return axios.post(HttpService.url + path, data, {header: {
-      'Access-Control-Allow-Origin':'*',
-      'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,OPTIONS',
-      'Access-Control-Allow-Headers':"Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  }});
+    return axios.post(HttpService.url + path, data);
   }
 
   static put(path, data = {}) {
